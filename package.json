@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && yarn storybook:build",
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook:build": "storybook build -o public/storybook"
   },
   "dependencies": {
     "@types/node": "18.14.6",
