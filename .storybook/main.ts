@@ -9,15 +9,8 @@ const config: StorybookConfig = {
   ],
   framework: {
     name: "@storybook/nextjs",
-    options: {
-    },
+    options: {},
   },
-  staticDirs: [
-    {
-      from: '../public/fonts',
-      to: 'public/fonts',
-    },
-  ],
   docs: {
     autodocs: "tag",
   },
