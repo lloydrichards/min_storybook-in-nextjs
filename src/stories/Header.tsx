@@ -1,7 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { Button } from './Button';
-import './header.css';
+import { Button } from "./Button";
 
 type User = {
   name: string;
@@ -14,11 +13,21 @@ interface HeaderProps {
   onCreateAccount: () => void;
 }
 
-export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
+export const Header = ({
+  user,
+  onLogin,
+  onLogout,
+  onCreateAccount,
+}: HeaderProps) => (
   <header>
-    <div className="wrapper">
-      <div>
-        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <div className="flex items-center gap-8 px-4 py-5">
+      <div className="flex flex-col items-center">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g fill="none" fillRule="evenodd">
             <path
               d="M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z"
@@ -34,21 +43,27 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps
             />
           </g>
         </svg>
-        <h1>Acme</h1>
+        <h1 className="text-lg dark:text-white">Acme</h1>
       </div>
-      <div>
+      <div className="w-full">
         {user ? (
-          <>
-            <span className="welcome">
+          <div className="flex items-center justify-between">
+            {/* snipped for brevity */}
+            <span className="mr-3 text-lg dark:text-white">
               Welcome, <b>{user.name}</b>!
             </span>
             <Button size="small" onClick={onLogout} label="Log out" />
-          </>
+          </div>
         ) : (
-          <>
+          <div className="flex items-center justify-end gap-4">
             <Button size="small" onClick={onLogin} label="Log in" />
-            <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
-          </>
+            <Button
+              primary
+              size="small"
+              onClick={onCreateAccount}
+              label="Sign up"
+            />
+          </div>
         )}
       </div>
     </div>
