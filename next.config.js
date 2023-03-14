@@ -3,12 +3,12 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  async redirects() {
+  trailingSlash: true,
+  async rewrites() {
     return [
       {
-        source: '/storybook',
+        source: '/storybook/',
         destination: '/storybook/index.html',
-        permanent: true,
       },
     ]
   }
