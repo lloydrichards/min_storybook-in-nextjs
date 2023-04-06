@@ -36,9 +36,10 @@ export const LogIn: Story = {
 };
 
 export const AddItems: Story = {
-  play: async ({ canvasElement, step }) => {
+  play: async (context) => {
+    const { canvasElement, step } = context;
     const canvas = within(canvasElement);
-    await step("Log in", async () => LogIn.play({ canvasElement }));
+    await step("Log in", async () => LogIn.play(context));
 
     await step("Add item", async () => {
       const addItemButton = await canvas.getByRole("button", {
