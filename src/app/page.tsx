@@ -1,9 +1,7 @@
 "use client";
-import { Inter } from "next/font/google";
+import { Button } from "../components/button/Button";
 import { useState } from "react";
 import { NavBar } from "../components/nav_bar/NavBar";
-
-const inter = Inter({ subsets: ["latin"] });
 
 type User = {
   name: string;
@@ -11,9 +9,10 @@ type User = {
 
 export default function Home() {
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [items, setItems] = useState<string[]>([]);
 
   return (
-    <article>
+    <main>
       <NavBar
         user={user}
         onLogin={() => setUser({ name: "Jane Doe" })}
@@ -21,73 +20,64 @@ export default function Home() {
         onCreateAccount={() => setUser({ name: "Jane Doe" })}
       />
 
-      <section className="dark:bg-slate-800 dark:text-white">
-        <h2>Pages in Storybook</h2>
-        <p>
-          We recommend building UIs with a{" "}
-          <a
-            href="https://componentdriven.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <strong>component-driven</strong>
-          </a>{" "}
-          process starting with atomic components and ending with pages.
-        </p>
-        <p>
-          Render pages with mock data. This makes it easy to build and review
-          page states without needing to navigate to them in your app. Here are
-          some handy patterns for managing page data in Storybook:
-        </p>
-        <ul>
-          <li>
-            Use a higher-level connected component. Storybook helps you compose
-            such data from the &quot;args&quot; of child component stories
-          </li>
-          <li>
-            Assemble data in the page component from your services. You can mock
-            these services out using Storybook.
-          </li>
-        </ul>
-        <p>
-          Get a guided tutorial on component-driven development at{" "}
-          <a
-            href="https://storybook.js.org/tutorials/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Storybook tutorials
-          </a>
-          . Read more in the{" "}
-          <a
-            href="https://storybook.js.org/docs"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            docs
-          </a>
-          .
-        </p>
-        <div className="tip-wrapper">
-          <span className="tip">Tip</span> Adjust the width of the canvas with
-          the{" "}
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 12 12"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g fill="none" fillRule="evenodd">
-              <path
-                d="M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z"
-                id="a"
-                fill="#999"
-              />
-            </g>
-          </svg>
-          Viewports addon in the toolbar
-        </div>
-      </section>
-    </article>
+      <article className="flex min-h-[50vh] flex-col gap-4 rounded-md p-4 dark:bg-slate-800 dark:text-white">
+        <section className="rounded-md p-4 dark:bg-slate-700 dark:text-white">
+          <h2 className="text-lg">Pages in Storybook</h2>
+          <p>
+            Welcome to the Storybook oin NextJS testing repo. This is a UI
+            development environment for your UI components. Here you can use
+            storybook to develop components interactively, document them, and
+            test them.
+          </p>
+        </section>
+        <section>
+          {user ? (
+            <div className="rounded-md p-4 dark:bg-slate-700 dark:text-white">
+              <h2 className="bold text-center text-lg">
+                Logged in as {user.name}
+              </h2>
+              <div className="grid gap-2">
+                {items.length == 0 && (
+                  <p className="text-center italic">No items</p>
+                )}
+                {items.map((item, index) => (
+                  <div key={item} className="flex gap-8">
+                    <p>{item}</p>
+                    <Button
+                      label="Remove"
+                      onClick={() => {
+                        const newItems = [...items];
+                        newItems.splice(index, 1);
+                        setItems(newItems);
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-row-reverse gap-2">
+                <Button
+                  label="Add Item"
+                  primary
+                  onClick={() =>
+                    setItems([
+                      ...items,
+                      `${new Date().toLocaleTimeString()}: Item #${new Date().getMilliseconds()}`,
+                    ])
+                  }
+                />
+                <Button label="Clear" onClick={() => setItems([])} />
+              </div>
+            </div>
+          ) : (
+            <div className="grid gap-8 rounded-md p-8 dark:bg-orange-800 dark:text-white">
+              <h2 className="text-center text-lg italic">Not logged in</h2>
+              <p className="text-center italic">
+                Please login or sign up to see the content of this page.
+              </p>
+            </div>
+          )}
+        </section>
+      </article>
+    </main>
   );
 }

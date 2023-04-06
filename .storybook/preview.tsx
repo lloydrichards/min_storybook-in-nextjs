@@ -47,6 +47,7 @@ const preview: Preview = {
         },
       ],
     },
+    viewport: { viewports: customViewports },
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
