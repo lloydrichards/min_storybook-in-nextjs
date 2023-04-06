@@ -1,24 +1,23 @@
 import React from "react";
-
-import { Button } from "./Button";
+import { Button } from "../button/Button";
 
 type User = {
   name: string;
 };
 
-interface HeaderProps {
+export interface NavBarProps {
   user?: User;
   onLogin: () => void;
   onLogout: () => void;
   onCreateAccount: () => void;
 }
 
-export const Header = ({
+export const NavBar = ({
   user,
   onLogin,
   onLogout,
   onCreateAccount,
-}: HeaderProps) => (
+}: NavBarProps) => (
   <header>
     <div className="flex items-center gap-8 px-4 py-5">
       <div className="flex flex-col items-center">

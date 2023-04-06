@@ -1,10 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
-
+import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 
-// More on how to set up stories at: https://storybook.js.org/docs/7.0/react/writing-stories/introduction
-const meta: Meta<typeof Button> = {
-  title: "Example/Button",
+export default {
+  title: "Components/Button",
   component: Button,
   tags: ["autodocs"],
   argTypes: {
@@ -12,9 +10,8 @@ const meta: Meta<typeof Button> = {
       control: "color",
     },
   },
-};
+} as Meta<typeof Button>;
 
-export default meta;
 type Story = StoryObj<typeof Button>;
 
 // More on writing stories with args: https://storybook.js.org/docs/7.0/react/writing-stories/args

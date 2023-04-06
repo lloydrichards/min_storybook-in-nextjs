@@ -1,19 +1,20 @@
+import Home from "../../app/page";
 import type { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent } from "@storybook/testing-library";
 
-import { Page } from "./Page";
-
-const meta: Meta<typeof Page> = {
-  title: "Example/Page",
-  component: Page,
+export default {
+  title: "Pages/Home",
+  component: Home,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/7.0/react/configure/story-layout
     layout: "fullscreen",
+    nextjs: {
+      appDirectory: true,
+    },
   },
-};
+} as Meta<typeof Home>;
 
-export default meta;
-type Story = StoryObj<typeof Page>;
+type Story = StoryObj<typeof Home>;
 
 export const LoggedOut: Story = {};
 
