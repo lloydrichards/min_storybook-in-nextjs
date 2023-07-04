@@ -1,10 +1,10 @@
 "use client";
-import { Button } from "../components/button/Button";
-import { useState } from "react";
-import { NavBar } from "../components/nav_bar/NavBar";
-import { allPosts, Post } from "contentlayer/generated";
-import Link from "next/link";
 import { compareDesc, format, parseISO } from "date-fns";
+import Link from "next/link";
+import { useState } from "react";
+import { allPosts, Post } from "../../.contentlayer/generated";
+import { NavBar } from "../components/nav_bar/NavBar";
+import { useMDXComponent } from "next-contentlayer/hooks";
 
 type User = {
   name: string;
@@ -61,6 +61,8 @@ export default function Home() {
 }
 
 function PostCard(post: Post) {
+  const MDXContent = useMDXComponent(post.body.code);
+
   return (
     <div className="mb-8">
       <h2 className="mb-1 text-xl">
@@ -74,10 +76,7 @@ function PostCard(post: Post) {
       <time dateTime={post.date} className="mb-2 block text-xs text-gray-600">
         {format(parseISO(post.date), "LLLL d, yyyy")}
       </time>
-      <div
-        className="text-sm [&>*:last-child]:mb-0 [&>*]:mb-3"
-        dangerouslySetInnerHTML={{ __html: post.body.html }}
-      />
+      <MDXContent />
     </div>
   );
 }
