@@ -1,8 +1,9 @@
+const { withContentlayer } = require('next-contentlayer')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
+  reactStrictMode: true,
+  swcMinify: true,
   trailingSlash: true,
   async rewrites() {
     return [
@@ -14,4 +15,4 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+module.exports = withContentlayer(nextConfig)
